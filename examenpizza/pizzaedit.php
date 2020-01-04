@@ -5,13 +5,14 @@ $sql = 'SELECT * FROM pizza WHERE id=:id';
 $statement = $con->prepare($sql);
 $statement->execute([':id' => $id ]);
 $pizza = $statement->fetch(PDO::FETCH_OBJ);
-if (isset ($_POST['name'])  && isset($_POST['price']) && isset($_POST['description']) ) {
+if (isset ($_POST['name'])  && isset($_POST['price']) && isset($_POST['description']) && isset($_POST['type']) ) {
     $name = $_POST['name'];
     $price = $_POST['price'];
     $description = $_POST['description'];
-    $sql = 'UPDATE pizza SET name=:name, price=:price, description=:description WHERE id=:id';
+    $type = $_POST['type'];
+    $sql = 'UPDATE pizza SET name=:name, price=:price, description=:description, type=:type WHERE id=:id';
     $statement = $con->prepare($sql);
-    if ($statement->execute([':name' => $name, ':price' => $price, ':description' => $description, ':id' => $id])) {
+    if ($statement->execute([':name' => $name, ':price' => $price, ':description' => $description,  ':type' => $type, ':id' => $id])) {
         header("Location: pizzaread.php");
     }
 }
@@ -40,6 +41,10 @@ if (isset ($_POST['name'])  && isset($_POST['price']) && isset($_POST['descripti
                     <div class="form-group">
                         <label for="description">Description</label>
                         <input type="description" value="<?= $pizza->description; ?>" name="description" id="description" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="type">Type</label>
+                        <input type="type" value="<?= $pizza->type; ?>" name="type" id="type" class="form-control">
                     </div>
                     <div class="form-group">
                         <button type="submit" class="btn btn-info">Update pizza</button>

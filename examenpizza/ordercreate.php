@@ -1,5 +1,16 @@
 <?php
 require 'db.php';
+
+$pizzas = $con->prepare("SELECT * FROM pizza");
+$pizzas->execute();
+$pizzas = $pizzas->fetchAll(PDO::FETCH_ASSOC);
+
+$reserveringen = $con->prepare("SELECT * FROM reservering");
+$reserveringen->execute();
+$reserveringen = $reserveringen->fetchAll(PDO::FETCH_ASSOC);
+
+
+
 $message = '';
 if (isset ($_POST['reservering_id'])  && isset($_POST['product_id'])  ) {
     $reservering_id = $_POST['reservering_id'];
@@ -16,7 +27,7 @@ if (isset ($_POST['reservering_id'])  && isset($_POST['product_id'])  ) {
     <div class="container">
         <div class="card mt-5">
             <div class="card-header">
-                <h2>Create a pizza</h2>
+                <h2>Create a order</h2>
             </div>
             <div class="card-body">
                 <?php if(!empty($message)): ?>
@@ -26,16 +37,34 @@ if (isset ($_POST['reservering_id'])  && isset($_POST['product_id'])  ) {
                 <?php endif; ?>
                 <form method="post">
                     <div class="form-group">
-                        <label for="name">reservering_id</label>
-                        <input type="text" name="reservering_id" id="reservering_id" class="form-control">
+                        <label for="name">reserveringen</label>
+                        <select name="reservering_id">
+                            <?php
+
+                            foreach($reserveringen as $reservering)
+                            {
+                                echo "<option value=\"{$reservering['id']}\">{$reservering['id']} ({$reservering['naam']})</option>";
+                            }
+
+                            ?>
+                        </select>
                     </div>
                     <div class="form-group">
-                        <label for="price">product_id</label>
-                        <input type="product_id" name="product_id" id="product_id" class="form-control">
+                        <label for="product">producten</label>
+                        <select name="product_id">
+                            <?php
+
+                            foreach($pizzas as $pizza)
+                            {
+                                echo "<option value=\"{$pizza['id']}\">{$pizza['name']} ({$pizza['price']})</option>";
+                            }
+                            
+                            ?>
+                        </select>
                     </div>
 
                     <div class="form-group">
-                        <button type="submit" class="btn btn-info">Create a pizza</button>
+                        <button type="submit" class="btn btn-info">Create a order</button>
                     </div>
                 </form>
             </div>

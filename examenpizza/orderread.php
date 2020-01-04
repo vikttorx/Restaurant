@@ -30,7 +30,7 @@ $order_item = $statement->fetchAll(PDO::FETCH_OBJ);
             <table class="table table-bordered">
                 <tr>
                     <th>ID</th>
-                    <th>Tafel</th>
+                    <th>Reservering</th>
                     <th>Product</th>
 
 

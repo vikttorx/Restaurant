@@ -11,10 +11,15 @@ if (!isset($_SESSION['loggedin'])) {
 }
 
 
-$sql = 'SELECT * FROM order_item';
+$sql = 'SELECT * FROM order_item
+ JOIN pizza ON order_item.product_id = pizza.id
+
+ORDER BY reservering_id';
 $statement = $con->prepare($sql);
 $statement->execute();
 $order_item = $statement->fetchAll(PDO::FETCH_OBJ);
+
+
 ?>
 <style>
     .container1{
@@ -25,37 +30,48 @@ $order_item = $statement->fetchAll(PDO::FETCH_OBJ);
         width: 50%;
         padding: 10px;
     }
-    .rooms{
-        height:40px;
-        margin: auto;
-        margin-top:30px;
-        width: 760px;
-        padding: 10px;
-        background-color:lightblue;
-        box-shadow: 0px 6px 5px gray;
-    }
+
+
 
 
 </style>
 
 
 
+<?php require 'header.php'; ?>
 
-
-
- <?php foreach($order_item as $order_item): ?>
 <div class="container1">
     <div class="rooms">
-        <td><?= $order_item->id; ?></td>
-        <td><?= $order_item->reservering_id; ?></td>
-        <td><?= $order_item->product_id; ?></td>
-    </div>
 
-</div>
+        <table class="table ">
+            <tr>
+
+                <th>Reservation</th>
+                <th>Product</th>
+                <th>Price</th>
+
+ <?php foreach($order_item as $order_item): ?>
+
+
+
+
+        </tr>
+            <tr>
+
+        <td><?= $order_item->reservering_id; ?></td>
+        <td><?= $order_item->name; ?></td>
+        <td>&#8364;<?= $order_item->price; ?></td>
+
+
+        </tr>
+
     <?php endforeach; ?>
 
 
-<a class="nav-link" href="home.php">Back</a>
+        </table>
+    </div>
+
+</div>
 
 
 

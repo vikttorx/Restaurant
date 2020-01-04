@@ -15,9 +15,10 @@
 <nav class="navtop">
     <div>
         <a href="home.php"><i class="fas"></i>Website Title</a>
-        <a href="pizzaread.php"><i class="fas"></i>PizzaCrud</a>
-        <a href="orderread.php"><i class="fas"></i>Orders</a>
+        <a href="pizzaread.php"><i class="fas"></i> Pizza's</a>
+        <a href="ordercreate.php"><i class="fas"></i>Create order</a>
         <a href="orders.php"><i class="fas"></i>Orders</a>
+        <a href="readreservation.php"><i class="fas"></i>Reservations</a>
         <a href="profile.php"><i class="fas fa-user-circle"></i>Profile</a>
 
 

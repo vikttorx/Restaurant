@@ -1,13 +1,14 @@
 <?php
 require 'db.php';
 $message = '';
-if (isset ($_POST['name'])  && isset($_POST['price']) && isset($_POST['description']) ) {
+if (isset ($_POST['name'])  && isset($_POST['price']) && isset($_POST['description'])  && isset($_POST['type']) ) {
     $name = $_POST['name'];
     $price   = $_POST['price'];
     $description   = $_POST['description'];
-    $sql = 'INSERT INTO pizza(name, price, description) VALUES(:name, :price, :description)';
+    $type   = $_POST['type'];
+    $sql = 'INSERT INTO pizza(name, price, description, type) VALUES(:name, :price, :description, :type)';
     $statement = $con->prepare($sql);
-    if ($statement->execute([':name' => $name, ':price' => $price , ':description' => $description])) {
+    if ($statement->execute([':name' => $name, ':price' => $price , ':description' => $description , ':type' => $type])) {
         $message = 'data inserted successfully';
     }
 }
@@ -32,6 +33,10 @@ if (isset ($_POST['name'])  && isset($_POST['price']) && isset($_POST['descripti
                     <div class="form-group">
                         <label for="price">Price</label>
                         <input type="price" name="price" id="price" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="type">Type</label>
+                        <input type="type" name="type" id="type" class="form-control">
                     </div>
                     <div class="form-group">
                         <label for="description">Description</label>
