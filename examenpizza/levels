@@ -1,0 +1,15 @@
+Authenticate.php add to session
+
+        $_SESSION['userlevel'] = "";
+        
+        
+Add ... to any page of authentication
+
+
+include 'db.php';
+session_start();
+
+if(isset($_SESSION['userlevel']) || !empty($_SESSION["userlevel"]))
+{
+if ($_SESSION['userlevel'] == 0)
+{
